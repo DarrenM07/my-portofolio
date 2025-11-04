@@ -1,103 +1,145 @@
-import Image from "next/image";
+// src/app/page.tsx
+import CardNav from "@/components/CardNav";
+import HeroSpline from "@/components/HeroSpline";
+import ShimmerButton from "@/components/ShimmerButton";
+import StarBorder from '@/components/StarBorder';
+import Year from "@/components/Year";
+import Link from "next/link";
+import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
 
-export default function Home() {
+export default function Page() {
+  const navItems = [
+    {
+      label: "Discover Pages",
+      bgColor: "#0D0716",
+      textColor: "#fff",
+        links: [
+        { label: "Home", ariaLabel: "Home pages", href: "/" },
+        { label: "About Me", ariaLabel: "About Me", href: "/about" },
+        { label: "Skills", ariaLabel: "Skills", href: "/skills" },
+        { label: "Projects", ariaLabel: "Projects", href: "/projects" },
+      ],
+    },
+    {
+      label: "My Projects & Skills",
+      bgColor: "#170D27",
+      textColor: "#fff",
+      links: [
+        { label: "Skills", ariaLabel: "Skills", href: "/skills" },
+        { label: "Projects", ariaLabel: "Projects", href: "/projects" },
+      ],
+    },
+    {
+      label: "Stay Connect !",
+      bgColor: "#271E37",
+      textColor: "#fff",
+      links: [
+        { label: "Email", ariaLabel: "Email us", href: "mailto:darrenms7120@gmail.com" },
+        { label: "Github", ariaLabel: "Github", href: "https://github.com/DarrenM07" },
+        { label: "Instagram", ariaLabel: "Instagram", href: "https://www.instagram.com/darrenms_07" },
+        { label: "Medium", ariaLabel: "Medium", href: "https://medium.com/@darren.marcello" },
+        { label: "LinkedIn", ariaLabel: "LinkedIn", href: "https://www.linkedin.com/in/darren-sidabutar-811852288/" },
+      ],
+    },
+  ];
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main>
+      <CardNav
+        logo="/logo.svg"
+        logoAlt="Company Logo"
+        items={navItems}
+        baseColor="#fff"
+        menuColor="#000"
+        buttonBgColor="#111"
+        buttonTextColor="#fff"
+        ease="power3.out"
+        ctaText="Get Started"
+        ctaHref="/contact"
+      />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* HERO */}
+      <section className="relative">
+        <HeroSpline
+          sceneLight="https://prod.spline.design/2r0vSg8PZVAUrn13/scene.splinecode"
+          sceneDark="https://prod.spline.design/LRES4pVbmvSya9aa/scene.splinecode"
+          className="h-[100vh] relative"
+        />
+
+        {/* Text overlay: left-aligned hero content like the screenshot */}
+        <div className="absolute inset-0 pointer-events-none">
+    <div className="container-std h-full flex items-start pt-20 md:pt-24 md:max-w-[1600px] lg:max-w-[2000px]">
+      <div className="w-full md:w-1/2 pointer-events-auto">
+              <div className="max-w-xl">
+                <br></br><br></br>
+                <p className="inline-block mb-6 bg-white/5 text-sm text-[var(--accent)] rounded-full px-4 py-1 backdrop-blur">✨ Innovation For the Future</p>
+
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 text-gradient drop-shadow-[0_8px_30px_rgba(0,0,0,0.6)]">
+                  WELCOME TO Darren's
+                  <br />
+                  PORTOFOLIO
+                </h1>
+
+                <h2 className="text-xl md:text-2xl font-medium mb-4 text-[var(--accent)]">Junior Software Engineer | AI Enthusiast</h2>
+
+                <p className="text-[var(--muted)] text-base md:text-lg mb-6">
+                  I'm a junior full stack developer passionate about creating meaningful digital experiences. My work combines modern web technologies with clean, efficient code.
+                </p>
+
+                <div className="flex items-center gap-3">
+                  <a
+                    className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-white/5 dark:bg-black/5"
+                    href="https://github.com/DarrenM07"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="github"
+                    title="GitHub"
+                  >
+                    <SiGithub className="w-5 h-5 text-[var(--foreground)]" />
+                  </a>
+
+                  <a
+                    className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-white/5 dark:bg-black/5"
+                    href="https://www.instagram.com/darrenms_07"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="instagram"
+                    title="Instagram"
+                  >
+                    <SiInstagram className="w-5 h-5 text-[var(--foreground)]" />
+                  </a>
+
+                  <a
+                    className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-white/5 dark:bg-black/5"
+                    href="https://www.linkedin.com/in/darren-sidabutar-811852288/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="linkedin"
+                    title="LinkedIn"
+                  >
+                    <SiLinkedin className="w-5 h-5 text-[var(--foreground)]" />
+                  </a>
+                </div>
+                {/* Button linking to About page, placed under social icons */}
+                <div className="mt-6">
+                  <StarBorder className="inline-block" color="var(--foreground)" speed="5s">
+                      <Link href="/about" aria-label="Learn more about Darren">About Me</Link>
+                  </StarBorder>
+                </div>
+              </div>
+            </div>
+            {/* right column removed so overlay doesn't reserve space — Spline offsets remain unchanged */}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+        {/* Overlay dihapus agar DotGrid terlihat */}
+      </section>
+
+      {/* (Explore section removed - single About button placed under social icons) */}
+
+      <footer className="border-t border-white/10 py-6 text-center text-sm text-[var(--muted)]">
+        © <Year /> Darren. All rights reserved.
       </footer>
-    </div>
+    </main>
   );
 }
