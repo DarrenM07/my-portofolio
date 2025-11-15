@@ -62,9 +62,9 @@ const projects = [
       period: 'Present',
       notes: 'Production-like monitoring platform with role-based access and exportable visualizations.',
     },
-    image: '/images/projects/pantautular.png',
+    image: '/public/images.png',
     repo: 'https://github.com/PPL-BRIN-2025',
-    live: 'https://pantautular.example.com',
+    live: 'https://keen-jewelle-samuellapnadia-71c13d07.koyeb.app/',
   },
 ];
 
