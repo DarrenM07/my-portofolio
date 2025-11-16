@@ -34,7 +34,7 @@ const projects = [
       period: '2024-2025',
       notes: 'Full-stack app with auth, file uploads and owner dashboard for managing listings.',
     },
-    image: '/images/projects/papikos.png',
+    image: '/public/image2.png',
     repo: 'https://github.com/Group3-AdvProg/papikos',
     live: 'https://unacceptable-martelle-group3-advprog-7fb35194.koyeb.app/',
   },
