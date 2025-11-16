@@ -56,23 +56,32 @@ export default function ProjectsListClient({ projects }: { projects: Project[] }
   return (
     <>
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            onClick={() => setSelected(p)}
-            aria-haspopup="dialog"
-            aria-expanded={selected?.id === p.id}
-            className="group text-left glass rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-semibold">{p.title}</h3>
-              <span aria-hidden className="inline-flex size-8 items-center justify-center rounded-full border border-white/15 group-hover:bg-white/10 transition">→</span>
-            </div>
-            <p className="mt-3 text-sm text-[var(--muted)]">{p.desc}</p>
-            <div className="mt-4 text-xs text-[var(--muted)]">{p.subtitle}</div>
-          </button>
-        ))}
+        {projects.map((p) => {
+          const thumb = p.image ? (Array.isArray(p.image) ? p.image[0] : p.image) : null;
+          return (
+            <button
+              key={p.id}
+              type="button"
+              onClick={() => setSelected(p)}
+              aria-haspopup="dialog"
+              aria-expanded={selected?.id === p.id}
+              className="group text-left glass rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
+            >
+              {thumb && (
+                <div className="mb-4 overflow-hidden rounded-lg">
+                  <img src={thumb} alt={`${p.title} thumbnail`} loading="lazy" className="w-full h-36 md:h-44 object-cover" />
+                </div>
+              )}
+
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold">{p.title}</h3>
+                <span aria-hidden className="inline-flex size-8 items-center justify-center rounded-full border border-white/15 group-hover:bg-white/10 transition">→</span>
+              </div>
+              <p className="mt-3 text-sm text-[var(--muted)]">{p.desc}</p>
+              <div className="mt-4 text-xs text-[var(--muted)]">{p.subtitle}</div>
+            </button>
+          );
+        })}
       </div>
 
       {selected && (
@@ -209,7 +218,7 @@ function ImageSlider({ images, title }: { images: string[]; title: string }) {
   const next = () => setIdx((s) => (s + 1) % images.length);
 
   return (
-    <div className="w-full h-44 md:h-56 bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
+    <div className="w-full h-64 md:h-80 bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
       <img src={images[idx]} alt={`${title} screenshot ${idx + 1}`} className="w-full h-full object-cover" />
 
       {images.length > 1 && (
