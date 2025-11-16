@@ -20,7 +20,7 @@ const projects = [
       period: '2024',
       notes: 'Mock discovery app with search, filters and responsive UI. Focused on component reusability and UX.',
     },
-    image: '/image.png',
+    image: '',
     repo: 'https://github.com/kevinadriano1/urbaneat',
     live: 'https://urbaneat.example.com',
   },
