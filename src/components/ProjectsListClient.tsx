@@ -13,7 +13,8 @@ type Project = {
     period: string;
     notes?: string;
   };
-  image?: string;
+  // support either a single image path or an array of image paths for a slider
+  image?: string | string[];
   repo?: string;
   live?: string;
 };
@@ -96,12 +97,13 @@ export default function ProjectsListClient({ projects }: { projects: Project[] }
             className="relative max-w-2xl w-full rounded-2xl shadow-lg z-10 overflow-hidden modal-panel"
             style={{ backgroundColor: isDark ? '#0b0b0b' : '#ffffff', color: isDark ? '#fff' : '#000', marginTop: '1rem' }}
           >
-            {/* Top image */}
-            {selected.image && (
-              <div className="w-full h-44 md:h-56 bg-gray-100 dark:bg-gray-900">
-                <img src={selected.image} alt={`${selected.title} screenshot`} className="w-full h-full object-cover" />
-              </div>
-            )}
+            {/* Top image / slider */}
+            {selected.image && (() => {
+              const images = Array.isArray(selected.image) ? selected.image : [selected.image];
+              return (
+                <ImageSlider images={images} title={selected.title} />
+              );
+            })()}
 
             {/* Absolute close X in top-right */}
             <button
@@ -193,5 +195,56 @@ export default function ProjectsListClient({ projects }: { projects: Project[] }
         </div>
       )}
     </>
+  );
+}
+
+// Small inline image slider used by the modal header. Keeps implementation local to this file.
+function ImageSlider({ images, title }: { images: string[]; title: string }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => setIdx(0), [images]);
+
+  if (!images || images.length === 0) return null;
+
+  const prev = () => setIdx((s) => (s - 1 + images.length) % images.length);
+  const next = () => setIdx((s) => (s + 1) % images.length);
+
+  return (
+    <div className="w-full h-44 md:h-56 bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
+      <img src={images[idx]} alt={`${title} screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+
+      {images.length > 1 && (
+        <>
+          <button
+            aria-label="Previous image"
+            onClick={prev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2"
+            style={{ zIndex: 20 }}
+          >
+            ‹
+          </button>
+
+          <button
+            aria-label="Next image"
+            onClick={next}
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2"
+            style={{ zIndex: 20 }}
+          >
+            ›
+          </button>
+
+          <div className="absolute left-0 right-0 bottom-2 flex items-center justify-center gap-2 z-20">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to image ${i + 1}`}
+                onClick={() => setIdx(i)}
+                className={`w-2 h-2 rounded-full ${i === idx ? 'bg-white' : 'bg-white/40'}`}
+                style={{ opacity: 0.95 }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
