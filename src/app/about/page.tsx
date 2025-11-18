@@ -62,25 +62,24 @@ export default function AboutPage() {
   return (
     <main>
       <CardNav {...cardNavProps} className="about-nav" />
-      <section className="container-std mt-2 md:mt-4 py-16 md:py-24">
-        <br></br>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <section className="container-std mt-2 md:mt-4 py-12 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
           {/* Left: portrait + intro text */}
           <div className="flex flex-col items-start gap-6">
             {/* NOTE: place the image file into `public/` as `PASFOTO (2).png` */}
-            <div className="w-48 h-48 rounded-full overflow-hidden border border-white/10">
+            <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border border-white/10 mx-auto md:mx-0 mt-12 md:mt-16">
               <img src="/PASFOTO (2).png" alt="Darren photo" className="w-full h-full object-cover" />
             </div>
 
             <div className="max-w-md">
-              <h1 className="text-4xl font-bold mb-3">About</h1>
-              <p className="text-[var(--muted)] text-lg leading-relaxed">
+              <h1 className="text-3xl md:text-4xl font-bold mb-3">About</h1>
+              <p className="text-[var(--muted)] text-base md:text-lg leading-relaxed">
                 I'm a junior full stack developer passionate about creating meaningful digital experiences. My work combines modern web technologies with clean, efficient code.
               </p>
 
               <div className="mt-6">
                 <h3 className="font-semibold mb-2">Connect</h3>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 justify-center md:justify-start">
                   <a
                     className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-white/5 dark:bg-black/5"
                     href="https://github.com/DarrenM07"
@@ -140,11 +139,10 @@ export default function AboutPage() {
 
           {/* Right: experience + education */}
           <div className="space-y-8">
-            <div className="relative">
-              <br></br>
-              <h2 className="text-2xl font-semibold mb-4">Experience</h2>
-              <span className="absolute left-3 top-6 bottom-0 w-px bg-white/10" aria-hidden />
-              <ul className="space-y-6 pl-8">
+            <div className="relative mt-12 md:mt-16">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Experience</h2>
+              <span className="hidden md:block absolute left-3 top-6 bottom-0 w-px bg-white/10" aria-hidden />
+              <ul className="space-y-6 pl-8 md:pl-8">
                 <li className="relative">
                   <div className="flex items-start justify-between">
                     <div>
@@ -161,9 +159,9 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <h2 className="text-2xl font-semibold mb-4">Education</h2>
-              <span className="absolute left-3 top-6 bottom-0 w-px bg-white/10" aria-hidden />
-              <ul className="space-y-6 pl-8">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Education</h2>
+              <span className="hidden md:block absolute left-3 top-6 bottom-0 w-px bg-white/10" aria-hidden />
+              <ul className="space-y-6 pl-8 md:pl-8">
 
                 <li className="relative">
                   <div className="flex items-start justify-between">
@@ -195,7 +193,7 @@ export default function AboutPage() {
               </ul>
             </div>
             {/* Skills CTA below education */}
-            <div className="mt-6">
+            <div className="mt-6 text-center md:text-left">
               <StarBorder className="inline-block" color="var(--foreground)">
                 <Link href="/skills" aria-label="See skills and tools">View my skills</Link>
               </StarBorder>
