@@ -16,12 +16,25 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   sceneLightOffset?: string;
   /** Optional CSS transform string to apply to the spline wrapper for the dark scene */
   sceneDarkOffset?: string;
+  /** Optional className to apply to the spline wrapper for the light scene */
+  sceneLightClassName?: string;
+  /** Optional className to apply to the spline wrapper for the dark scene */
+  sceneDarkClassName?: string;
+  /** Mobile / small breakpoint specific offsets and classes */
+  sceneLightOffsetMobile?: string;
+  sceneDarkOffsetMobile?: string;
+  sceneLightOffsetDesktop?: string;
+  sceneDarkOffsetDesktop?: string;
+  sceneLightClassNameMobile?: string;
+  sceneDarkClassNameMobile?: string;
+  sceneLightClassNameDesktop?: string;
+  sceneDarkClassNameDesktop?: string;
 };
 
 const DEFAULT_LIGHT = "https://prod.spline.design/2r0vSg8PZVAUrn13/scene.splinecode";
 const DEFAULT_DARK = "https://prod.spline.design/LRES4pVbmvSya9aa/scene.splinecode";
 
-function HeroSplineBase({ sceneLight, sceneDark, scene, className = "", sceneLightOffset, sceneDarkOffset, ...props }: Props) {
+function HeroSplineBase({ sceneLight, sceneDark, scene, className = "", sceneLightOffset, sceneDarkOffset, sceneLightClassName, sceneDarkClassName, sceneLightOffsetMobile, sceneDarkOffsetMobile, sceneLightOffsetDesktop, sceneDarkOffsetDesktop, sceneLightClassNameMobile, sceneDarkClassNameMobile, sceneLightClassNameDesktop, sceneDarkClassNameDesktop, ...props }: Props) {
   const [mode, setMode] = useState<'dark' | 'light'>(() => {
     if (typeof document === 'undefined') return 'light';
     const el = document.documentElement;
@@ -109,6 +122,55 @@ function HeroSplineBase({ sceneLight, sceneDark, scene, className = "", sceneLig
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+    // track viewport breakpoint (md = 768px) so we can pick mobile vs desktop offsets
+    const [isDesktop, setIsDesktop] = useState<boolean>(() => {
+      if (typeof window === 'undefined') return true;
+      return window.matchMedia('(min-width: 768px)').matches;
+    });
+
+    useEffect(() => {
+      if (typeof window === 'undefined') return;
+      const mq = window.matchMedia('(min-width: 768px)');
+      const onChange = () => setIsDesktop(mq.matches);
+      try {
+        mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange);
+      } catch (_) {
+        mq.addListener(onChange);
+      }
+      return () => {
+        try {
+          mq.removeEventListener ? mq.removeEventListener('change', onChange) : mq.removeListener(onChange);
+        } catch (_) {
+          mq.removeListener(onChange);
+        }
+      };
+    }, []);
+
+  // choose per-mode and per-breakpoint offsets/classes with sensible fallbacks
+  const defaultLight = 'translateX(24%) translateY(11%) scale(1.1)';
+  const defaultDark = 'translateX(15%) translateY(7%) scale(1.1)';
+
+  const chosenOffset = (() => {
+    if (mode === 'dark') {
+      if (isDesktop) return sceneDarkOffsetDesktop || sceneDarkOffset || defaultDark;
+      return sceneDarkOffsetMobile || sceneDarkOffset || defaultDark;
+    }
+    // light
+    if (isDesktop) return sceneLightOffsetDesktop || sceneLightOffset || defaultLight;
+    return sceneLightOffsetMobile || sceneLightOffset || defaultLight;
+  })();
+
+  const chosenClass = (() => {
+    if (mode === 'dark') {
+      if (isDesktop) return sceneDarkClassNameDesktop || sceneDarkClassName || 'spline-offset';
+      return sceneDarkClassNameMobile || sceneDarkClassName || 'spline-offset';
+    }
+    if (isDesktop) return sceneLightClassNameDesktop || sceneLightClassName || 'spline-offset';
+    return sceneLightClassNameMobile || sceneLightClassName || 'spline-offset';
+  })();
+
+  const offsetStyle = { transform: chosenOffset };
+
   return (
     <div className={`relative w-full overflow-hidden ${className}`} {...props}>
       <div
@@ -121,13 +183,8 @@ function HeroSplineBase({ sceneLight, sceneDark, scene, className = "", sceneLig
         {/* Visible Spline - keyed by currentSceneUrl so it remounts when swapped */}
         {/* apply per-scene offsets so we can nudge camera/framing differences between scenes */}
         <div
-          className="spline-offset"
-          style={{
-            transform:
-              mode === 'dark'
-                ? sceneDarkOffset || 'translateX(15%) translateY(7%) scale(1.1)'
-                : sceneLightOffset || 'translateX(24%) translateY(11%) scale(1.1)'
-          }}
+          className={chosenClass}
+          style={offsetStyle}
         >
           <Spline key={currentSceneUrl} scene={currentSceneUrl} />
         </div>

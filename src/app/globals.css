@@ -111,6 +111,23 @@ body {
   }
 }
 
+/* Mobile / desktop specific helpers used by HeroSpline props */
+.spline-offset-light-mobile,
+.spline-offset-dark-mobile {
+  will-change: transform;
+}
+
+.spline-offset-light-desktop,
+.spline-offset-dark-desktop {
+  will-change: transform;
+  /* keep the same transform-origin so scaling centers on the scene */
+  transform-origin: center center;
+}
+
+/* You can add visual tweaks per theme/viewport here */
+.spline-offset-dark-desktop { filter: brightness(0.98); }
+.spline-offset-light-desktop { filter: none; }
+
 .a-hover { transition: color 180ms ease; }
 .a-hover:hover { color: var(--accent); }
 
