@@ -145,3 +145,30 @@ body {
 .about-nav {
   top: 1em !important; /* atau 0.5em kalau mau lebih naik lagi */
 }
+
+/* Timeline dots: black on light theme, white on dark theme */
+.timeline-dot {
+  background: #0a0a0a;
+  border: 1px solid rgba(10, 10, 10, 0.8);
+}
+html.dark .timeline-dot {
+  background: #f5f5f5;
+  border: 1px solid rgba(245, 245, 245, 0.7);
+}
+
+/* Timeline vertical line */
+.timeline-list {
+  position: relative;
+}
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 14px; /* start below top dot */
+  bottom: 0;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.15);
+}
+html.dark .timeline-list::before {
+  background: rgba(255, 255, 255, 0.2);
+}

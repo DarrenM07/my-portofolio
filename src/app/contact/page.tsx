@@ -11,23 +11,22 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   const navItems = [
     {
-      label: "Discover Pages",
+      label: "Discover",
       bgColor: "#0D0716",
       textColor: "#fff",
         links: [
         { label: "Home", ariaLabel: "Home pages", href: "/" },
         { label: "About Me", ariaLabel: "About Me", href: "/about" },
-        { label: "Skills", ariaLabel: "Skills", href: "/skills" },
-        { label: "Projects", ariaLabel: "Projects", href: "/projects" },
       ],
     },
     {
-      label: "My Projects & Skills",
+      label: "Work & Projects",
       bgColor: "#170D27",
       textColor: "#fff",
       links: [
         { label: "Skills", ariaLabel: "Skills", href: "/skills" },
         { label: "Projects", ariaLabel: "Projects", href: "/projects" },
+        { label: "Achievements", ariaLabel: "Achievements", href: "/achievements" },
       ],
     },
     {

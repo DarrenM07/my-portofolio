@@ -119,8 +119,15 @@ export default function ProjectsListClient({ projects }: { projects: Project[] }
               ref={closeRef}
               onClick={() => setSelected(null)}
               aria-label="Close dialog"
-              className="absolute right-4 top-4 rounded-full p-2 bg-white/90 hover:bg-white/100 dark:bg-black/80 dark:hover:bg-black text-sm"
-              style={{ border: '1px solid rgba(0,0,0,0.08)' }}
+              className="absolute right-4 top-4 rounded-full p-2 text-sm transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/60 dark:focus:ring-white/40 focus:ring-offset-transparent"
+              style={{
+                backgroundColor: isDark ? '#0b0b0b' : '#f5f5f5',
+                color: isDark ? '#f5f5f5' : '#0b0b0b',
+                border: isDark ? '1px solid rgba(255,255,255,0.6)' : '1px solid rgba(0,0,0,0.6)',
+                boxShadow: isDark
+                  ? '0 8px 20px rgba(0,0,0,0.35)'
+                  : '0 8px 20px rgba(0,0,0,0.15)',
+              }}
             >
               ×
             </button>
