@@ -5,7 +5,7 @@ import ProjectsListClient from '@/components/ProjectsListClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects • Darren',
+  title: 'Projects | Darren',
   description: 'Projects by Darren',
 };
 
@@ -48,46 +48,70 @@ const projects = [
       period: '2025 - 2026',
       notes: 'Designed for quick publishing and event management; uses static-generation where appropriate.',
     },
-    image: ['/image3.png','/image4.png','/image5.png','/image6.png','/image7.png'],
+    image: ['/MIST/image3.png','/MIST/image4.png','/MIST/image5.png','/MIST/image6.png','/MIST/image7.png'],
     repo: 'https://github.com/MIST-FEB',
     live: 'https://www.mistfebui.info/',
   },
   {
     id: 'pantautular',
-    title: 'PantauTular - Public Health Monitoring Platform',
-    subtitle: 'React/Next.js, Django/DRF, PostgreSQL, Tailwind, JWT | Present',
+    title: 'PantauTular by BRIN - Public Health Monitoring Platform',
+    subtitle: 'React/Next.js, Django/DRF, PostgreSQL, Tailwind, JWT | 2025',
     desc: 'Web app to report and visualize public health incidents. Features role based access, simple data CRUD, charts dashboard, PNG export, and activity logs.',
     details: {
       tech: ['React/Next.js', 'Django/DRF', 'PostgreSQL', 'Tailwind', 'JWT'],
-      period: 'Present',
-      notes: 'Production-like monitoring platform with role-based access and exportable visualizations.',
+      period: '2025',
+      notes: 'Health incident reporting platform with data visualization and role-based access control.',
     },
-    image: '/image.png',
+    image: ['/PantauTular/PantauTular.png', '/PantauTular/PantauTular4.png','/PantauTular/PantauTular1.png', '/PantauTular/PantauTular2.png','/PantauTular/PantauTular6.png', '/PantauTular/PantauTular3.png', '/PantauTular/PantauTular5.png'],
     repo: 'https://github.com/PPL-BRIN-2025',
     live: 'https://keen-jewelle-samuellapnadia-71c13d07.koyeb.app/',
+  },
+  {
+    id: 'IndoXport',
+    title: 'IndoExport – Traceable Export & QC Platform',
+    subtitle: 'React/Next.js | 2025',
+    desc: 'Web platform that digitizes shrimp export workflows. Supports batch registration, simulated contaminant QC, immutable ledger logging, verified marketplace listings, buyer–supplier matchmaking, auto-generated export documents, and basic T/T–L/C payment simulation.',
+    details: {
+      tech: ['React/Next.js'],
+      period: '2025',
+      notes: 'Comprehensive export management platform with focus on traceability and workflow automation.',
+    },
+    image: ['/IndoXport/IndoXport.png', '/IndoXport/IndoXport1.png', '/IndoXport/IndoXport2.png', '/IndoXport/IndoXport3.png', '/IndoXport/IndoXport4.png', '/IndoXport/IndoXport5.png', '/IndoXport/IndoXport6.png', '/IndoXport/IndoXport7.png'],
+    repo: 'https://github.com/geordievannese/IndoXport',
+    live: 'https://indo-xport.vercel.app/',
+  },
+];
+
+const publications = [
+  {
+    title: '180-Day Mortality Prediction for Critically Ill Patients',
+    outlet: 'Co-author, Fasilkom UI',
+    year: '2025',
+    href: '/Publications/180-Day%20Mortality%20Prediction%20for%20Critically%20Ill%20Patients.pdf',
+    summary:
+      'Built ML experiments (XGBoost with hyper-parameter tuning), evaluated with Accuracy/ROC-AUC, and led feature-importance analysis.',
   },
 ];
 
 export default function ProjectsPage() {
   const navItems = [
     {
-      label: "Discover Pages",
+      label: "Discover",
       bgColor: "#0D0716",
       textColor: "#fff",
         links: [
         { label: "Home", ariaLabel: "Home pages", href: "/" },
         { label: "About Me", ariaLabel: "About Me", href: "/about" },
-        { label: "Skills", ariaLabel: "Skills", href: "/skills" },
-        { label: "Projects", ariaLabel: "Projects", href: "/projects" },
       ],
     },
     {
-      label: "My Projects & Skills",
+      label: "Work & Projects",
       bgColor: "#170D27",
       textColor: "#fff",
       links: [
         { label: "Skills", ariaLabel: "Skills", href: "/skills" },
         { label: "Projects", ariaLabel: "Projects", href: "/projects" },
+        { label: "Achievements", ariaLabel: "Achievements", href: "/achievements" },
       ],
     },
     {
@@ -128,9 +152,36 @@ export default function ProjectsPage() {
       <h1 className="text-3xl md:text-4xl font-bold mb-6">Projects</h1>
       <ProjectsListClient projects={projects} />
 
+      <section className="mt-12">
+        <h2 className="text-2xl md:text-3xl font-semibold mb-4">Publications</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {publications.map((pub) => (
+            <article key={pub.title} className="glass rounded-2xl p-6 border border-white/5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold">{pub.title}</h3>
+                  <p className="text-sm text-[var(--muted)] mt-1">{pub.outlet} - {pub.year}</p>
+                </div>
+                <a
+                  href={pub.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm underline underline-offset-4"
+                  aria-label={`Read ${pub.title}`}
+                  download
+                >
+                  Read
+                </a>
+              </div>
+              <p className="text-sm text-[var(--muted)] mt-3 leading-relaxed">{pub.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <div className="mt-8">
         <StarBorder>
-            <Link href="/" aria-label="Back to home">Back to home</Link>
+            <Link href="/achievements" aria-label="My Achievements">My Achievements</Link>
         </StarBorder>
       </div>
       </section>
