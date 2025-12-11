@@ -19,7 +19,7 @@ type Project = {
   live?: string;
 };
 
-export default function ProjectsListClient({ projects }: { projects: Project[] }) {
+export default function ProjectsListClient({ projects, forceFrame = false }: { projects: Project[]; forceFrame?: boolean }) {
   const [selected, setSelected] = useState<Project | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -67,9 +67,13 @@ export default function ProjectsListClient({ projects }: { projects: Project[] }
               aria-expanded={selected?.id === p.id}
               className="group text-left glass rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
             >
-              {thumb && (
-                <div className="mb-4 overflow-hidden rounded-lg">
-                  <img src={thumb} alt={`${p.title} thumbnail`} loading="lazy" className="w-full h-36 md:h-44 object-cover" />
+              {(thumb || forceFrame) && (
+                <div className="mb-4 overflow-hidden rounded-lg border border-white/10 bg-white/30 dark:bg-black/30 h-36 md:h-44 flex items-center justify-center">
+                  {thumb ? (
+                    <img src={thumb} alt={`${p.title} thumbnail`} loading="lazy" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-xs uppercase tracking-wide text-[var(--muted)]">Image placeholder</span>
+                  )}
                 </div>
               )}
 
@@ -107,11 +111,21 @@ export default function ProjectsListClient({ projects }: { projects: Project[] }
             style={{ backgroundColor: isDark ? '#0b0b0b' : '#ffffff', color: isDark ? '#fff' : '#000', marginTop: '1rem' }}
           >
             {/* Top image / slider */}
-            {selected.image && (() => {
-              const images = Array.isArray(selected.image) ? selected.image : [selected.image];
-              return (
-                <ImageSlider images={images} title={selected.title} />
-              );
+            {(() => {
+              if (selected?.image) {
+                const images = Array.isArray(selected.image) ? selected.image : [selected.image];
+                return (
+                  <ImageSlider images={images} title={selected.title} />
+                );
+              }
+              if (forceFrame) {
+                return (
+                  <div className="w-full h-64 md:h-80 bg-white/40 dark:bg-black/60 border-b border-white/10 flex items-center justify-center">
+                    <span className="text-xs uppercase tracking-wide text-[var(--muted)]">Image placeholder</span>
+                  </div>
+                );
+              }
+              return null;
             })()}
 
             {/* Absolute close X in top-right */}

@@ -15,6 +15,7 @@ const achievements = [
     title: 'SOCIEACT BEM FASILKOM - Volunteer Certificate',
     subtitle: 'BEM Fasilkom UI',
     desc: 'Volunteer certificate for SocieAct community outreach.',
+    image: '/Certificate/Sertifikat SocieAct_Darren Marcello Sidabutar (1).png',
     details: {
       tech: ['Community', 'Mentoring'],
       period: 'Issued Sep 2024',
@@ -26,6 +27,7 @@ const achievements = [
     title: 'TOEFL ITP',
     subtitle: 'Certification',
     desc: 'English proficiency certificate.',
+    image: '/Certificate/TOEFL_ITP_Sertif.jpg',
     details: {
       tech: ['English Proficiency'],
       period: 'Issued Jul 2023 - Expires Jul 2025',
@@ -33,10 +35,23 @@ const achievements = [
     },
   },
   {
+    id: 'compfest-cert',
+    title: 'COMPFEST - Human Resources Recruiter',
+    subtitle: 'Volunteer Certificate',
+    desc: 'Certificate for recruiting and onboarding volunteers in COMPFEST.',
+    image: '/Certificate/sertif compfest.jpg',
+    details: {
+      tech: ['Organization', 'People Ops'],
+      period: 'Mar 2025 - Nov 2025',
+      notes: 'Defined criteria, ran screening, and coordinated onboarding across divisions.',
+    },
+  },
+  {
     id: 'hology-ub',
     title: 'HOLOGY UB - Participant Certificate',
     subtitle: 'Credential ID: 106/STF.E/HOLOGY7.0/XI/2024',
     desc: 'Participation in HOLOGY UB event.',
+    image: '/Certificate/Hology.png',
     details: {
       tech: ['Competition'],
       period: '2024',
@@ -48,6 +63,7 @@ const achievements = [
     title: 'Pekan RISTEK - 3rd Place Mini Hackathon Competition',
     subtitle: 'Credential: R2025-5786-9696',
     desc: 'Placed 3rd in the Mini Hackathon.',
+    image: '/Certificate/R2025-5786-9696.png',
     details: {
       tech: ['Hackathon', 'Product'],
       period: '2025',
@@ -113,11 +129,14 @@ export default function AchievementsPage() {
       <section className="container-std py-16 md:py-24">
       <br></br><br></br>
       <h1 className="text-3xl md:text-4xl font-bold mb-6">Achievements & Certifications</h1>
-      <ProjectsListClient projects={achievements} />
+      <ProjectsListClient projects={achievements} forceFrame />
 
-      <div className="mt-8">
+      <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-3">
         <StarBorder>
-            <Link href="/" aria-label="Back to home">Back to home</Link>
+            <Link href="/projects" aria-label="Go to projects">cd projects</Link>
+        </StarBorder>
+        <StarBorder>
+            <Link href="/" aria-label="Back to home">cd home</Link>
         </StarBorder>
       </div>
       </section>

@@ -53,7 +53,7 @@ export default function ThemeToggle() {
       aria-pressed={theme === "dark"}
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       onClick={toggle}
-      className="fixed top-4 right-4 z-50 inline-flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 p-2 text-sm backdrop-blur"
+      className="fixed right-4 bottom-4 md:bottom-auto md:top-4 z-50 inline-flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 p-2 text-sm backdrop-blur"
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
       {theme === "dark" ? "☀️" : "🌙"}

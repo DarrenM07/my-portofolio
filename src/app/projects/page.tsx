@@ -179,11 +179,14 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <div className="mt-8">
-        <StarBorder>
-            <Link href="/achievements" aria-label="My Achievements">My Achievements</Link>
-        </StarBorder>
-      </div>
+        <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-3">
+          <StarBorder>
+              <Link href="/skills" aria-label="cd skills">cd skills</Link>
+          </StarBorder>
+          <StarBorder>
+              <Link href="/achievements" aria-label="cd achievements">cd achievements</Link>
+          </StarBorder>
+        </div>
       </section>
     </main>
   );
